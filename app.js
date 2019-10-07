@@ -1,3 +1,4 @@
-import {PhonesPage} from "./scripts/phones.component.js";
+import {PhonesPageComponent} from "./scripts/phones.component.js";
 
-new PhonesPage({element: document.querySelector('#root')})
+const rootElement = document.querySelector('#root');
+new PhonesPageComponent({element: rootElement});
