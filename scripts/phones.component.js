@@ -1,7 +1,10 @@
 import {PhonesCatalogComponent} from "./phones-catalog/phones-catalog.component.js";
 import {BaseComponent} from "./shared/component/base/base.component.js";
 import {PhonesService} from "./phones.service.js";
+import {PhoneDetailsComponent} from "./phone-details/phone-details.component.js";
+
 console.log(PhonesService);
+
 export class PhonesPageComponent extends BaseComponent {
 
     constructor({element}) {
@@ -9,7 +12,15 @@ export class PhonesPageComponent extends BaseComponent {
         this._render();
         this._catalog = new PhonesCatalogComponent({
             element: this._element.querySelector('.phones-catalog'),
-            phones: PhonesService.getAll()
+            phones: PhonesService.getAll(),
+            onPhoneSelected: (phoneId) => {
+                this._catalog.hide();
+                this._phoneDetails.show(PhonesService.getOneById(phoneId));
+            }
+        })
+
+        this._phoneDetails = new PhoneDetailsComponent({
+            element: this._element.querySelector('.phone-details'),
         })
     }
 
@@ -45,6 +56,7 @@ export class PhonesPageComponent extends BaseComponent {
 
     <!--Main content-->
     <div class="col-md-10 phones-catalog"> </div>
+    <div class="col-md-10 phone-details"> </div>
   </div>`
     }
 }
