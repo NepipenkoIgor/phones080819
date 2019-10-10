@@ -71,7 +71,6 @@ export class PhonesPageComponent extends BaseComponent {
       </section>
 
       <section class="cart">
- 
       </section>
     </div>
 

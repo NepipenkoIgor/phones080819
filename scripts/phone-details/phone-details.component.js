@@ -25,8 +25,6 @@ export class PhoneDetailsComponent extends BaseComponent {
         this._currentImg = this._element.querySelector('img.phone');
         // this._currentImg.src = phone.images[0]
         [this._currentImg.src] = phone.images;
-
-
         super.show();
     }
 
@@ -34,6 +32,7 @@ export class PhoneDetailsComponent extends BaseComponent {
         this._element.innerHTML = `
           <div>
 
+<<<<<<< HEAD
     <img class="phone">
 
     <button class="back">Back</button>
