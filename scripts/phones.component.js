@@ -2,6 +2,7 @@ import {PhonesCatalogComponent} from "./phones-catalog/phones-catalog.component.
 import {BaseComponent} from "./shared/component/base/base.component.js";
 import {PhonesService} from "./phones.service.js";
 import {PhoneDetailsComponent} from "./phone-details/phone-details.component.js";
+import {CartComponent} from "./cart/cart.component.js";
 
 console.log(PhonesService);
 
@@ -10,17 +11,42 @@ export class PhonesPageComponent extends BaseComponent {
     constructor({element}) {
         super({element});
         this._render();
+        this._initCatalog();
+        this._initPhoneDetails();
+        this._initCart();
+    }
+
+    _initCatalog() {
         this._catalog = new PhonesCatalogComponent({
             element: this._element.querySelector('.phones-catalog'),
             phones: PhonesService.getAll(),
-            onPhoneSelected: (phoneId) => {
-                this._catalog.hide();
-                this._phoneDetails.show(PhonesService.getOneById(phoneId));
-            }
-        })
+        });
 
+        this._catalog
+            .subscribe('phone-selected', ({detail}) => {
+                this._catalog.hide();
+                this._phoneDetails.show(PhonesService.getOneById(detail));
+            }).subscribe('add-to-cart', ({detail}) => {
+            this._cart.add(detail);
+        });
+    }
+
+    _initPhoneDetails() {
         this._phoneDetails = new PhoneDetailsComponent({
             element: this._element.querySelector('.phone-details'),
+            onBack: () => {
+                this._catalog.show();
+                this._phoneDetails.hide();
+            },
+            onAdd: (phoneId) => {
+                this._cart.add(phoneId);
+            }
+        })
+    }
+
+    _initCart() {
+        this._cart = new CartComponent({
+            element: this._element.querySelector('.cart'),
         })
     }
 
@@ -44,13 +70,8 @@ export class PhonesPageComponent extends BaseComponent {
         </p>
       </section>
 
-      <section>
-        <p>Shopping Cart</p>
-        <ul>
-          <li>Phone 1</li>
-          <li>Phone 2</li>
-          <li>Phone 3</li>
-        </ul>
+      <section class="cart">
+
       </section>
     </div>
 
