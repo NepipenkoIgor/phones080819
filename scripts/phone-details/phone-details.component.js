@@ -32,7 +32,6 @@ export class PhoneDetailsComponent extends BaseComponent {
         this._element.innerHTML = `
           <div>
 
-<<<<<<< HEAD
     <img class="phone">
 
     <button class="back">Back</button>
