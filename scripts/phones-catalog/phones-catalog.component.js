@@ -2,9 +2,9 @@ import {BaseComponent} from "../shared/component/base/base.component.js";
 
 export class PhonesCatalogComponent extends BaseComponent {
 
-    constructor({element, phones}) {
+    constructor({element}) {
         super({element});
-        this._phones = phones;
+        this._phones = [];
         this._render();
 
         this
@@ -16,6 +16,13 @@ export class PhonesCatalogComponent extends BaseComponent {
                 this.emit('add-to-cart', phoneId);
             })
     }
+
+    show(phones) {
+        this._phones = phones;
+        this._render();
+        super.show();
+    }
+
 
     _render() {
         this._element.innerHTML = `

@@ -225,12 +225,46 @@ export const PhonesService = new class {
         console.log('init phones service')
     }
 
-    getAll() {
-        return mockedData;
+    getAll({query, orderBy} = {}) {
+        // setTimeout(() => {
+        //     const filteredPhones = this._filter(query, mockedData);
+        //     cb(this._sort(orderBy, filteredPhones));
+        // }, 3000);
+
+        return new Promise((res, rej) => {
+            setTimeout(() => {
+                const filteredPhones = this._filter(query, mockedData);
+                res(this._sort(orderBy, filteredPhones));
+            }, 3000)
+        })
     }
 
     getOneById(phoneId) {
         return mockedPhone;
 
     }
-}
+
+    _filter(query, phones) {
+        if (!query) {
+            return phones;
+        }
+        return phones.filter((phone) => phone.name.toLowerCase().includes(query))
+    }
+
+    _sort(orderBy, phones) {
+        if (!orderBy) {
+            return phones;
+        }
+
+        phones.sort((phone1, phone2) => {
+            if (phone1[orderBy] > phone2[orderBy]) {
+                return 1;
+            }
+            if (phone1[orderBy] < phone2[orderBy]) {
+                return -1;
+            }
+            return 0;
+        });
+        return phones;
+    }
+};
