@@ -9,7 +9,6 @@ export class PhonesCatalogComponent extends BaseComponent {
 
         this
             .on('click', '.thumb', ({delegateTarget: {dataset: {phoneId}}}) => {
-
                 this.emit('phone-selected', phoneId);
             })
             .on('click', '.add', ({delegateTarget: {dataset: {phoneId}}}) => {
@@ -29,7 +28,7 @@ export class PhonesCatalogComponent extends BaseComponent {
               <ul class="phones">
               ${this._phones.map((phone) => `
                       <li class="thumbnail phone" data-phone-id=${phone.id}>
-          <a href="#!/phones/${phone.id}" class="thumb">
+          <a href="#!/phones/${phone.id}" class="thumb" data-phone-id=${phone.id}>
             <img alt=${phone.name} src=${phone.imageUrl}>
           </a>
 

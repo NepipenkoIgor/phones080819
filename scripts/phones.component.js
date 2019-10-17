@@ -25,9 +25,14 @@ export class PhonesPageComponent extends BaseComponent {
         // this._catalog.show(PhonesService.getAll({}));
         this._showFilteredPhones();
         this._catalog
-            .subscribe('phone-selected', ({detail}) => {
-                this._catalog.hide();
-                this._phoneDetails.show(PhonesService.getOneById(detail));
+            .subscribe('phone-selected', async ({detail}) => {
+                try {
+                    const phone = await PhonesService.getOneById(detail);
+                    this._catalog.hide();
+                    this._phoneDetails.show(phone);
+                } catch (err) {
+                    console.log(err);
+                }
             })
             .subscribe('add-to-cart', ({detail}) => {
                 this._cart.add(detail);
