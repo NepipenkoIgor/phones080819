@@ -1,5 +1,5 @@
 import {PhonesCatalogComponent} from "./phones-catalog/phones-catalog.component.js";
-import {BaseComponent} from "./shared/component/base/base.component.js";
+import {BaseComponent} from "../shared/component/base/base.component.js";
 import {PhonesService} from "./phones.service.js";
 import {PhoneDetailsComponent} from "./phone-details/phone-details.component.js";
 import {CartComponent} from "./cart/cart.component.js";
