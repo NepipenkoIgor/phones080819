@@ -1,4 +1,5 @@
-import {BaseComponent} from "../shared/component/base/base.component.js";
+import {BaseComponent} from "../../shared/component/base/base.component.js";
+import template from './filters.component.hbs';
 
 export class FiltersComponent extends BaseComponent {
     constructor({element}) {
@@ -14,19 +15,6 @@ export class FiltersComponent extends BaseComponent {
     }
 
     render() {
-        this._element.innerHTML = `
-                <p>
-          Search:
-          <input type="text" class="search">
-        </p>
-
-        <p>
-          Sort by:
-          <select class="sort">
-            <option value="name">Alphabetical</option>
-            <option value="age">Newest</option>
-          </select>
-        </p>
-        `
+        this._element.innerHTML = template()
     }
 }

@@ -1,5 +1,5 @@
-import {BaseComponent} from "../shared/component/base/base.component.js";
-
+import {BaseComponent} from "../../shared/component/base/base.component.js";
+import './phone-details.component.css';
 export class PhoneDetailsComponent extends BaseComponent {
 
     constructor({element, onBack, onAdd}) {

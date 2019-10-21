@@ -1,5 +1,5 @@
-import {BaseComponent} from "../shared/component/base/base.component.js";
-
+import {BaseComponent} from "../../shared/component/base/base.component.js";
+import template from './cart.component.hbs';
 export class CartComponent extends BaseComponent {
     constructor({element}) {
         super({element});
@@ -26,16 +26,6 @@ export class CartComponent extends BaseComponent {
     }
 
     _render() {
-        this._element.innerHTML = `
-               <p>Shopping Cart</p>
-        <ul>
-        ${Object.entries(this._phones).map(([phoneId, count]) => {
-            return `
-                         <li>${phoneId} - (${count})</li>
-                         <button class="remove" data-phone-id=${phoneId}>x</button>
-             `
-        }).join('')}
-        </ul>
-        `
+        this._element.innerHTML = template({phones: this._phones})
     }
 }
